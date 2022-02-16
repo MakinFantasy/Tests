@@ -22,7 +22,7 @@ def check_document_existance(user_doc_number):
 
 
 def get_doc_owner_name():
-    user_doc_number = input('Введите номер документа - ')
+    user_doc_number = '11-2'
     print()
     doc_exist = check_document_existance(user_doc_number)
     if doc_exist:
@@ -65,7 +65,7 @@ def append_doc_to_shelf(doc_number, shelf_number):
 
 
 def delete_doc():
-    user_doc_number = input('Введите номер документа - ')
+    user_doc_number = '11-2'
     doc_exist = check_document_existance(user_doc_number)
     if doc_exist:
         for current_document in documents:
@@ -73,11 +73,11 @@ def delete_doc():
             if doc_number == user_doc_number:
                 documents.remove(current_document)
                 remove_doc_from_shelf(doc_number)
-                return doc_number, True
+                return doc_number
 
 
 def get_doc_shelf():
-    user_doc_number = input('Введите номер документа - ')
+    user_doc_number = '11-2'
     doc_exist = check_document_existance(user_doc_number)
     if doc_exist:
         for directory_number, directory_docs_list in directories.items():
@@ -107,10 +107,11 @@ def show_all_docs_info():
 
 
 def add_new_doc():
-    new_doc_number = input('Введите номер документа - ')
-    new_doc_type = input('Введите тип документа - ')
-    new_doc_owner_name = input('Введите имя владельца документа- ')
-    new_doc_shelf_number = input('Введите номер полки для хранения - ')
+    params = {'type': 'passport', 'number': '123', 'name': 'Oleg', 'shelf': '3'}
+    new_doc_number = params['number']
+    new_doc_type = params['type']
+    new_doc_owner_name = params['name']
+    new_doc_shelf_number = params['shelf']
     new_doc = {
         "type": new_doc_type,
         "number": new_doc_number,
@@ -172,4 +173,5 @@ def secretary_program_start():
 
 
 if __name__ == '__main__':
+    #params = {'type': 'passport', 'number': '123', 'name': 'Oleg', 'shelf': '3'}
     secretary_program_start()

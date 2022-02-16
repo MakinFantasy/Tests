@@ -1,29 +1,26 @@
-import builtins
 import unittest
-from unittest import mock
-from unittest.mock import patch, Mock
-
-import app
-from app import get_doc_shelf, get_doc_owner_name, get_all_doc_owners_names, remove_doc_from_shelf, add_new_doc, documents, directories
+from app import get_doc_shelf, get_doc_owner_name, get_all_doc_owners_names, remove_doc_from_shelf, add_new_doc, \
+    documents, directories, delete_doc
 
 
 class TestDocFunctions(unittest.TestCase):
     def test_add_doc_normal_flow(self):
-        # Patch dictionary in target scope
-        with patch.dict(directories, {}, clear=True), \
-                patch.object(app, documents, []), \
-                patch('builtins.input', side_effect=['1', 'passport', 'Test Owner', '1']):
-            add_new_doc()
-        pass
+        # По скольку функция добавления возврращает номер полки, то сравнение ведется с ним
+        self.assertEqual(add_new_doc(), '3')
 
     def test_get_shelf(self):
-        pass
+        # Проверка наличия документа на полке
+        self.assertEqual(get_doc_shelf(), '1')
 
     def test_get_owner(self):
-        pass
+        # Проверка вывода имени владельца документа
+        self.assertEqual(get_doc_owner_name(), 'Геннадий Покемонов')
 
     def test_get_all(self):
-        pass
+        # Проверка всех имен владельцев документов
+        self.assertEqual(get_all_doc_owners_names(), {'Аристарх Павлов', 'Геннадий Покемонов', 'Oleg', 'Василий Гупкин'})
+
 
     def test_remove_doc(self):
-        pass
+        # Проверка удаления документа по его номеру, функция в прриложении возвращает номер удаленного элемента
+        self.assertEqual(delete_doc(), '11-2')
